@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        language: [ "python" ]  # anpassen an dein Repo
+        language: ["python"]  # anpassen an dein Repo
 
     steps:
       - name: Repository auschecken
@@ -25,11 +25,10 @@ jobs:
         with:
           languages: ${{ matrix.language }}
 
-      - name: Projekt bauen / vorbereiten
-        # Beispiel: für .NET auf Windows
+      - name: Projekt vorbereiten (Python)
         run: |
-          dotnet restore
-          dotnet build --configuration Release
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: CodeQL Analyse ausführen
         uses: github/codeql-action/analyze@v3
