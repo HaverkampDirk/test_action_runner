@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         language: ["python"]
-        
+
 
     steps:
       - name: Repository auschecken
@@ -36,6 +36,7 @@ jobs:
             Write-Output 'Keine requirements.txt gefunden; überspringe Installation.'
           }
 
+          
       - name: CodeQL Analyse ausführen
         uses: github/codeql-action/analyze@v3
         with:
