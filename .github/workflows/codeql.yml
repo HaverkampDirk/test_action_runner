@@ -1,4 +1,4 @@
-name: "CodeQL Security Scan (Python, Windows Self-hosted)"
+name: "CodeQL test"
 
 on:
   push:
