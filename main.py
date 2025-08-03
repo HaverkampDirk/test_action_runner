@@ -11,4 +11,3 @@ def main(message):
     print("test: {}".format(text))
 
 main("Hello World2!")
-
