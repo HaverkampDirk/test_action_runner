@@ -26,13 +26,14 @@ jobs:
           languages: ${{ matrix.language }}
 
       - name: Python-Umgebung vorbereiten
+        shell: pwsh
         run: |
           python -m pip install --upgrade pip
-          if exist requirements.txt (
+          if (Test-Path 'requirements.txt') {
             pip install -r requirements.txt
-          ) else (
-            echo "Keine requirements.txt gefunden; überspringe Installation."
-          )
+          } else {
+            Write-Output 'Keine requirements.txt gefunden; überspringe Installation.'
+          }
 
       - name: CodeQL Analyse ausführen
         uses: github/codeql-action/analyze@v3
