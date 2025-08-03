@@ -11,6 +11,9 @@ jobs:
       matrix:
         python-version: ["3.8", "3.9", "3.10"]
     steps:
+    - name: Mark repo as safe for Git
+      run: git config --global --add safe.directory D:/coding/actions-runner/_work/test_action_runner/test_action_runner
+
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
