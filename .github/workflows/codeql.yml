@@ -1,6 +1,10 @@
-name: "CodeQL Security Scan (Windows Self-hosted)"
+name: "CodeQL Security Scan (Python, Windows Self-hosted)"
 
-on: [push]
+on:
+  push:
+    branches: [ main ]  # oder dein Default-Branch
+  pull_request:
+    branches: [ main ]
 
 jobs:
   codeql:
@@ -14,21 +18,21 @@ jobs:
 
     strategy:
       matrix:
-        language: ["python"]  # anpassen an dein Repo
+        language: ["python"]
 
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v3
 
+      - name: Python-Umgebung vorbereiten
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
       - name: CodeQL initialisieren
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
-
-      - name: Projekt vorbereiten (Python)
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
 
       - name: CodeQL Analyse ausführen
         uses: github/codeql-action/analyze@v3
